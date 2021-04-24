@@ -18,7 +18,7 @@
       <h1 class="header-title">Photo-filter</h1>
     </header>
     <main class="main">
-      <div class="filters">
+      <form action="#" class="filters">
         <label>
           Blur:
           <input
@@ -79,7 +79,7 @@
           />
           <output name="result">0</output>
         </label>
-      </div>
+      </form>
       <div class="editor">
         <div class="btn-container">
           <button class="btn btn-reset">Reset</button>
@@ -95,6 +95,9 @@
             />
           </label>
           <button class="btn btn-save">Save picture</button>
+        </div>
+        <div class="canvas">
+          <canvas></canvas>
         </div>
         <img src="assets/img/img.jpg" alt="image" />
       </div>
@@ -114,6 +117,7 @@
         </a>
       </div>
     </footer>
-    <button class="fullscreen openfullscreen"></button>
+    <button class="fullscreen openfullscreen" onclick="Fullscreen()"></button>
+    <script src="index.js"></script>
   </body>
 </html>
