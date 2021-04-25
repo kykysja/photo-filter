@@ -1,8 +1,10 @@
 const filtersWrap = document.querySelector(".filters");
 const filtersInputs = document.querySelectorAll(".filters input");
 const img = document.querySelector(".editor img");
+const btnReset = document.querySelector(".btn-reset");
 const btnNext = document.querySelector(".btn-next");
 const canvas = document.querySelector("canvas");
+const loadInput = document.querySelector("input[type='file']");
 
 let click = 1;
 let imgNum;
@@ -84,5 +86,29 @@ function drawCanvasImg(filtersObj) {
     }
     ctx.filter = filtersList;
     ctx.drawImage(canvasImg, 0, 0);
+  };
+}
+
+btnReset.addEventListener("click", reset);
+function reset() {
+  filtersWrap.reset();
+  filtersInputs.forEach((el) => {
+    el.nextElementSibling.innerHTML = el.value;
+  });
+  drawCanvasImg();
+}
+
+loadInput.addEventListener("change", loadUserImg);
+function loadUserImg() {
+  const file = loadInput.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+
+  loadInput.value = "";
+  reader.onloadend = () => {
+    drawCanvasImg(createFiltersObject());
   };
 }
