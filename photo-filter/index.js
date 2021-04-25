@@ -5,6 +5,10 @@ const btnReset = document.querySelector(".btn-reset");
 const btnNext = document.querySelector(".btn-next");
 const canvas = document.querySelector("canvas");
 const loadInput = document.querySelector("input[type='file']");
+const btnSave = document.querySelector(".btn-save");
+const buttons = document.querySelector(".btn-container");
+const btnInput = document.querySelector("#btnInput");
+const fullscreen = document.querySelectorAll(".fullscreen");
 
 let click = 1;
 let imgNum;
@@ -111,4 +115,34 @@ function loadUserImg() {
   reader.onloadend = () => {
     drawCanvasImg(createFiltersObject());
   };
+}
+
+btnSave.addEventListener("click", savePicture);
+function savePicture() {
+  const dataURL = canvas.toDataURL();
+  let fileName = "01.png";
+  let a = document.createElement("a");
+  a.href = dataURL;
+  a.download = fileName;
+  a.click();
+}
+
+buttons.addEventListener("click", (event) => {
+  buttons.querySelector(".btn-active").classList.remove("btn-active");
+  if (event.target === btnInput) {
+    event.target.parentNode.classList.add("btn-active");
+  } else {
+    event.target.classList.add("btn-active");
+    console.log(event.target);
+  }
+});
+
+function Fullscreen() {
+  if (event.target.classList.contains("openfullscreen")) {
+    document.documentElement.requestFullscreen();
+    event.target.classList.remove("openfullscreen");
+  } else {
+    document.exitFullscreen();
+    event.target.classList.add("openfullscreen");
+  }
 }
